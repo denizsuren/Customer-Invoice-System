@@ -1,56 +1,61 @@
-# 📡 PiA Telekom — Müşteri & Fatura Yönetim Sistemi
+# 📡 PiA Telekom — Customer & Invoice Management System
 
-Telekom operatörleri için geliştirilmiş, müşteri, abonelik ve fatura süreçlerini tek panelden yöneten full-stack bir yönetim uygulaması. Sistem; müşteri kaydından fatura takibine, bölgesel gelir analizinden müşteri risk skorlamasına ve gelir tahminlemesine kadar uçtan uca bir operasyon paneli sunar.
+A full-stack administration application built for telecom operators, managing customers, subscriptions, and invoicing from a single panel. The system provides an end-to-end operations dashboard covering everything from customer registration and invoice tracking to regional revenue analysis, customer risk scoring, and revenue forecasting.
 
-Proje bir **monorepo** olarak yapılandırılmıştır:
+The project is structured as a **monorepo**:
 
 ```
 customer-invoice-system/
 ├── backend/     → Spring Boot REST API (Java 25)
-└── frontend/    → React 19 + Vite yönetim paneli
+└── frontend/    → React 19 + Vite admin panel
 ```
 
-## ✨ Öne Çıkan Özellikler
+## ✨ Key Features
 
-- **Müşteri Yönetimi** — CRUD işlemleri, gelişmiş filtreleme (JPA Specification), müşteri detay görünümü
-- **Fatura & Ödeme Takibi** — fatura oluşturma, güncelleme, özet istatistikler, TL yükleme (recharge) kayıtları
-- **Dashboard** — gelir grafikleri, paket dağılımı, abonelik özetleri ve öneri kartları
-- **Analitik Modülü** — müşteri risk analizi, tahsilat aksiyonları, paket yükseltme önerileri ve gelir tahminleme (Apache Commons Math ile)
-- **Bölgesel Analiz** — Türkiye haritası üzerinde şehir bazlı gelir ve ödeme performansı görselleştirmesi
-- **Kimlik Doğrulama** — BCrypt ile şifrelenmiş admin girişi, oturum token'ı tabanlı yetkilendirme
+- **Customer Management** — CRUD operations, advanced filtering (JPA Specifications), customer detail views
+- **Invoice & Payment Tracking** — invoice creation and updates, summary statistics, top-up (recharge) records
+- **Dashboard** — revenue charts, package distribution, subscription summaries, and recommendation cards
+- **Analytics Module** — customer risk analysis, collection actions, package upgrade recommendations, and revenue forecasting (powered by Apache Commons Math)
+- **Regional Analysis** — city-level revenue and payment performance visualized on an interactive map of Turkey
+- **Authentication** — admin login with BCrypt-hashed passwords and session-token-based authorization
 
-## 🛠 Teknoloji Yığını
+## 🛠 Tech Stack
 
-| Katman | Teknolojiler |
+| Layer | Technologies |
 |---|---|
 | Backend | Java 25, Spring Boot 4, Spring Data JPA, Flyway, Caffeine Cache, springdoc-openapi (Swagger) |
-| Veritabanı | **PostgreSQL — [Supabase](https://supabase.com) üzerinde barındırılıyor** (connection pooler ile) |
+| Database | **PostgreSQL — hosted on [Supabase](https://supabase.com)** (via connection pooler) |
 | Frontend | React 19, Vite 8, React Router 7, ESLint + Prettier |
-| Geliştirme | Docker Compose (lokal PostgreSQL), Maven Wrapper |
+| Dev Tooling | Docker Compose (local PostgreSQL), Maven Wrapper |
 
-### Neden Supabase?
+### Why Supabase?
 
-Veritabanı olarak Supabase'in yönetilen PostgreSQL hizmeti kullanıldı. Bu sayede ekip üyeleri kendi makinelerinde ayrı veritabanı kurmak zorunda kalmadan **ortak bir buluta bağlı** çalışabildi; şema değişiklikleri Flyway migration'ları ile versiyonlanarak herkeste tutarlı kaldı. Bağlantı, Supabase'in **transaction pooler** endpoint'i (port 6543, `prepareThreshold=0`) üzerinden yapılır — bu, serverless-benzeri ortamlarda bağlantı limitlerini verimli kullanmayı sağlar. Lokal geliştirme için alternatif olarak `backend/docker-compose.yml` ile ayağa kaldırılan bir PostgreSQL container'ı da kullanılabilir.
+The database runs on Supabase's managed PostgreSQL service. This allowed team members to work against a **shared cloud database** without setting up local instances, while schema changes stayed consistent for everyone through versioned Flyway migrations. Connections go through Supabase's **transaction pooler** endpoint (port 6543, `prepareThreshold=0`), which makes efficient use of connection limits in serverless-like environments. For local development, a PostgreSQL container defined in `backend/docker-compose.yml` is available as an alternative.
 
-## 🚀 Hızlı Başlangıç
+## Quick Start
 
 ```bash
-# 1. Backend'i başlat (Supabase bağlantısı için DB_PASSWORD gerekir)
+# 1. Start the backend (DB_PASSWORD is required for the Supabase connection)
 cd backend
-export DB_PASSWORD=<supabase-db-sifresi>
+export DB_PASSWORD=<supabase-db-password>
 ./mvnw spring-boot:run
 # → API: http://localhost:8080  |  Swagger: http://localhost:8080/swagger-ui.html
 
-# 2. Frontend'i başlat
+# 2. Start the frontend
 cd ../frontend
 npm install
 npm run dev
-# → Panel: http://localhost:5173 (istekler Vite proxy ile backend'e yönlenir)
+# → Panel: http://localhost:5173 (requests are proxied to the backend by Vite)
 ```
 
-Detaylı kurulum ve yapılandırma için alt dizinlerdeki README dosyalarına bakın: [`backend/README.md`](backend/README.md) · [`frontend/README.md`](frontend/README.md)
+For detailed setup and configuration, see the READMEs in each subdirectory: [`backend/README.md`](backend/README.md) · [`frontend/README.md`](frontend/README.md)
 
-## 👥 Takım
+## 👥 Team
 
-Bu proje ekip çalışması olarak geliştirilmiştir.
-Geliştirme süreci pull request + code review akışıyla yürütülmüştür; katkı geçmişi için commit ve PR kayıtlarına bakabilirsiniz.
+This project was developed as a team effort.
+
+Development followed a pull request + code review workflow; see the commit and PR history for individual contributions.
+
+## 📄 License
+
+This project is for educational/portfolio purposes.
