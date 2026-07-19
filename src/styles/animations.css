@@ -1,0 +1,72 @@
+/*
+  DOSYA: animations.css
+  Grafik, modal ve görünme animasyonlarının başlangıç/bitiş halleri burada.
+  Animasyonun hızını değiştirmek için ilgili selector içindeki `animation: ... 0.8s ...`
+  süresine bakılır, bu kullanımlar çoğunlukla dashboard.css ve customers.css içindedir.
+*/
+
+/* Çizgi grafiğin çiziliyormuş gibi görünmesini sağlar. */
+@keyframes draw-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+/* Çizgi üzerindeki noktaların küçükten büyüyerek görünmesini sağlar. */
+@keyframes pop-point {
+  from {
+    opacity: 0;
+    transform: scale(0.25);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Sütunların aşağıdan yukarı uzamasını sağlar. */
+@keyframes grow-bar {
+  to {
+    transform: scaleY(1);
+  }
+}
+/* Elemanı hafif aşağıdan yukarı çıkararak görünür yapar. */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Donut grafik parçalarının doluyormuş gibi görünmesini sağlar. */
+@keyframes grow-donut {
+  from {
+    stroke-dasharray: 0 var(--circle-length);
+  }
+}
+/* Modal arkasındaki karartmanın yumuşak görünmesini sağlar. */
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+/* Modal kutusunun hafif aşağıdan ve küçük ölçekte açılmasını sağlar. */
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+  }
+}
+/* Kullanıcının hareketleri azalt ayarı açıksa animasyonları kapatır; erişilebilirlik için koru. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

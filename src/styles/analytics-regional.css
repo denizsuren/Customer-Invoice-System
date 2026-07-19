@@ -1,0 +1,319 @@
+/*
+  DOSYA: analytics-regional.css
+  Analizler ve Bölgesel sayfalarındaki kartların tasarımı burada kontrol edilir.
+  (Genel .dashboard-card, .chart-card, .card-heading, .badge classları dashboard.css
+  ve customers.css içinde tanımlıdır; burada yalnızca bu iki sayfaya özel classlar var.)
+*/
+
+/* Regional sayfasındaki iki grafik kartını eşit genişlikte yan yana tutar. */
+.dashboard-row--even {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+/* Analizler ekranını iki dar kolon yerine alt alta geniş kartlar halinde gösterir. */
+.analytics-stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+
+.analytics-stack .dashboard-card {
+  min-height: auto;
+  overflow: hidden;
+}
+
+.analytics-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+  gap: 14px;
+  align-items: start;
+}
+
+.analytics-main,
+.analytics-sidebar {
+  display: grid;
+  gap: 14px;
+}
+
+.analytics-sidebar {
+  position: sticky;
+  top: 88px;
+}
+
+.risk-line-card {
+  min-height: auto;
+}
+
+.risk-line-subtitle {
+  margin: -6px 0 14px;
+  color: var(--text-2);
+  font-size: 12px;
+}
+
+.risk-line-track {
+  display: flex;
+  width: 100%;
+  height: 14px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--soft);
+}
+
+.risk-line-segment {
+  min-width: 4px;
+  height: 100%;
+}
+
+.risk-line-segment--safe {
+  background: var(--success);
+}
+
+.risk-line-segment--normal {
+  background: var(--warning);
+}
+
+.risk-line-segment--risky {
+  background: var(--danger);
+}
+
+.risk-line-legend {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.risk-line-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.risk-line-legend__item strong {
+  display: block;
+  font-size: 12.5px;
+}
+
+.risk-line-legend__item span:last-child {
+  color: var(--text-2);
+  font-size: 11.5px;
+}
+
+.risk-line-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  flex: 0 0 auto;
+}
+
+.risk-line-dot--safe {
+  background: var(--success);
+}
+
+.risk-line-dot--normal {
+  background: var(--warning);
+}
+
+.risk-line-dot--risky {
+  background: var(--danger);
+}
+
+@media (max-width: 980px) {
+  .analytics-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .analytics-sidebar {
+    position: static;
+  }
+}
+
+
+/* ---------- Analizler: Ciro Tahmini kartı ---------- */
+
+.forecast-average {
+  display: grid;
+  gap: 4px;
+  padding: 4px 0 16px;
+}
+
+.forecast-average > span {
+  color: var(--text-2);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.forecast-average > strong {
+  font-size: 28px;
+}
+
+.forecast-divider {
+  height: 1px;
+  background: var(--line);
+  margin-bottom: 16px;
+}
+
+.forecast-estimates {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.forecast-estimate {
+  display: grid;
+  gap: 6px;
+}
+
+.forecast-estimate > span {
+  color: var(--text-2);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.forecast-estimate__value {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.forecast-estimate__value strong {
+  color: var(--accent);
+  font-size: 20px;
+}
+
+/* ---------- Analizler: Üst Paket Önerileri kartı ---------- */
+
+.overage-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 10px;
+}
+
+.overage-row {
+  min-width: 0;
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+}
+
+.overage-row__left {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.overage-row__left strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+.overage-row__left span {
+  color: var(--danger);
+  font-size: 12px;
+}
+
+.overage-row__meta {
+  color: var(--text-3);
+  font-size: 11.5px;
+}
+
+.overage-row__right {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.overage-arrow {
+  color: var(--text-3);
+  font-size: 12px;
+}
+
+.overage-tier-pill {
+  max-width: 100%;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: var(--soft);
+  color: var(--text-2);
+  font-size: 11.5px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.overage-tier-pill--accent {
+  color: var(--accent);
+}
+
+/* ---------- Bölgesel: yatay çubuk grafik ---------- */
+
+.hbar-subtitle {
+  margin: -6px 0 14px;
+  color: var(--text-2);
+  font-size: 12px;
+}
+
+.hbar-list {
+  display: grid;
+  gap: 14px;
+}
+
+.hbar-row {
+  display: grid;
+  gap: 5px;
+}
+
+.hbar-row__labels {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12.5px;
+}
+
+.hbar-row__labels > span {
+  color: var(--text-2);
+}
+
+.hbar-row__labels > strong {
+  font-size: 12.5px;
+}
+
+.hbar-track {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--soft);
+  overflow: hidden;
+}
+
+.hbar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: grow-hbar 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.hbar-fill--accent {
+  background: var(--accent);
+}
+
+.hbar-fill--blue {
+  background: var(--blue);
+}
+
+@keyframes grow-hbar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}

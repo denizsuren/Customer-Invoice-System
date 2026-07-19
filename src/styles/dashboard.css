@@ -1,0 +1,283 @@
+/*
+  DOSYA: dashboard.css
+  Ana sayfadaki istatistik kartları, grafik kartları, çizgi/donut/sütun grafikler
+  ve öneri motorunun tasarımı burada kontrol edilir.
+*/
+
+/* Üstteki dört istatistik kartını eşit sütunlara böler. */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+/* Her istatistik kartının yüksekliği, paddingi, borderı ve arka planı. */
+.stat-card {
+  min-height: 102px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+  display: grid;
+  align-content: center;
+  gap: 5px;
+}
+
+.stat-card > span {
+  color: var(--text-3);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+/* Kart içindeki büyük sayı. */
+.stat-card strong {
+  font-size: 24px;
+}
+
+.stat-card small {
+  color: var(--success);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.stat-card--warning strong {
+  color: var(--warning);
+}
+
+.stat-card--warning small,
+.stat-card--danger strong,
+.stat-card--danger small {
+  color: var(--danger);
+}
+/* İki dashboard kartını yan yana dizer; 1.65fr/1fr genişlik oranıdır. */
+.dashboard-row {
+  display: grid;
+  grid-template-columns: minmax(620px, 1.65fr) minmax(360px, 1fr);
+  gap: 12px;
+}
+/* Grafik ve öneri kartlarının ortak dış görünümü. */
+.dashboard-card {
+  min-width: 0;
+  min-height: 240px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+/* Kart başlığı ile sağdaki küçük açıklamayı aynı satıra getirir. */
+.card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.card-heading h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.card-heading span {
+  color: var(--text-3);
+  font-size: 11.5px;
+}
+/* Çizgi grafik SVG yüksekliği; grafiği daha uzun/kısa yapmak için height. */
+.line-chart {
+  width: 100%;
+  height: 205px;
+  overflow: visible;
+}
+
+.chart-grid-line {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.chart-axis-label {
+  fill: var(--text-3);
+  font-size: 10px;
+}
+/* Gelir çizgisinin rengi, kalınlığı ve animation süresi. */
+.revenue-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw-line 1s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+/* Çizgi üzerindeki veri noktaları ve görünme animasyonu. */
+.revenue-point {
+  fill: var(--accent);
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: pop-point 0.35s ease-out forwards;
+}
+/* Donut ile legendı yan yana dizer. */
+.donut-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-height: 180px;
+}
+/* Donutun dış boyutu; donut-chart ile aynı ölçüde tutulmalı. */
+.donut-chart-wrap {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  flex: 0 0 auto;
+}
+/* Donut SVG boyutu ve başlangıç yönü. */
+.donut-chart {
+  width: 140px;
+  height: 140px;
+  transform: rotate(-90deg);
+}
+/* Donut halkasının çizgi kalınlığı. */
+/* Renkli donut parçalarının animasyonu. */
+.donut-track,
+.donut-segment {
+  fill: none;
+  stroke-width: 14;
+}
+
+.donut-track {
+  stroke: #f0f1f4;
+}
+/* Renkli donut parçalarının animasyonu. */
+.donut-segment {
+  stroke-linecap: butt;
+  animation: grow-donut 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+/* Donut ortasındaki sayı ve yazının konumu. */
+.donut-center {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  opacity: 0;
+  animation: fade-up 0.4s ease-out 0.55s forwards;
+}
+
+.donut-center strong {
+  font-size: 16px;
+}
+
+.donut-center span {
+  color: var(--text-3);
+  font-size: 9px;
+}
+/* Donut açıklama listesinin yazı ve boşluk ayarı. */
+.donut-legend {
+  display: grid;
+  gap: 9px;
+  color: var(--text-2);
+  font-size: 12px;
+}
+
+.donut-legend > div,
+.chart-legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex: 0 0 auto;
+}
+
+.legend-dot--accent {
+  background: var(--accent);
+}
+
+.legend-dot--blue {
+  background: var(--blue);
+}
+/* Sütun grafiğin yüksekliği, sütun aralığı ve yatay paddingi. */
+.bar-chart {
+  height: 170px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  gap: 28px;
+  padding: 0 16px;
+}
+/* Her şehrin sayı+sütun+etiket düzeni. */
+.bar-column {
+  height: 170px;
+  min-width: 52px;
+  display: grid;
+  grid-template-rows: 18px 1fr 18px;
+  align-items: end;
+  justify-items: center;
+  gap: 5px;
+  color: var(--text-2);
+  font-size: 11px;
+}
+
+.bar-track {
+  height: 124px;
+  display: flex;
+  align-items: flex-end;
+}
+/* Renkli sütunun genişliği, köşesi ve animasyonu; yüksekliği JSX inline style ile gelir. */
+.bar-fill {
+  width: 34px;
+  border-radius: 5px 5px 0 0;
+  transform-origin: bottom;
+  transform: scaleY(0);
+  animation: grow-bar 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.bar-fill--accent {
+  background: var(--accent);
+}
+
+.bar-fill--blue {
+  background: var(--blue);
+}
+
+/* Sütunun üstündeki sayının görünümü. */
+.bar-value {
+  color: var(--text-3);
+  font-size: 10.5px;
+  opacity: 0;
+  animation: fade-up 0.35s ease-out forwards;
+}
+
+.chart-legend {
+  display: flex;
+  gap: 16px;
+  color: var(--text-2);
+  font-size: 11.5px;
+  margin-top: 10px;
+}
+
+.recommendation-card {
+  display: flex;
+  flex-direction: column;
+}
+/* Öneri listesinin boşluk ve yazı ayarı. */
+.recommendation-card ul {
+  margin: 2px 0 18px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 13px;
+  color: var(--text-2);
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.recommendation-card .button {
+  margin-top: auto;
+  align-self: flex-start;
+}

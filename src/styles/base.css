@@ -1,0 +1,109 @@
+/*
+  DOSYA: base.css
+  Tüm projenin temel renkleri, fontu ve global tarayıcı ayarları burada.
+  Bir rengi bütün projede değiştirmek için önce `:root` içindeki değişkenlere bak.
+*/
+
+/* Projenin renk paleti ve ana fontu. --accent ana mor, --lila sidebar, --line border, --text-* yazı tonlarıdır. */
+
+:root {
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  color: var(--text);
+  background: var(--page-bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --lila: #d6cbef;
+  --dark: #1e1e1e;
+  --accent: #8574e0;
+  --soft: #eeeafb;
+  --blue: #a8c8e8;
+  --line: #e5e7ec;
+  --text: #1b1f27;
+  --text-2: #5b6472;
+  --text-3: #98a0ad;
+  --panel: #fafafc;
+  --surface: #ffffff;
+  --page-bg: #ffffff;
+  --sidebar-text: rgba(30, 30, 30, 0.72);
+  --sidebar-hover: rgba(255, 255, 255, 0.35);
+  --sidebar-active-bg: rgba(255, 255, 255, 0.62);
+  --success-bg: #e6f4ea;
+  --success: #1e7a3c;
+  --warning-bg: #fcf3df;
+  --warning: #8a5a00;
+  --danger-bg: #fce9e9;
+  --danger: #b02a2a;
+}
+
+/*
+  KOYU MOD
+  ThemeContext, <html data-theme="dark"> attribute'unu ayarladığında bu blok
+  yukarıdaki değişkenleri geçersiz kılar. Yeni bir renk eklerken hem burada
+  hem yukarıdaki :root içinde karşılığını tanımlamayı unutma.
+*/
+[data-theme="dark"] {
+  --lila: #2a2440;
+  --dark: #f4f2fb;
+  --accent: #9d8ff0;
+  --soft: #2c2740;
+  --blue: #3c5978;
+  --line: #33353f;
+  --text: #eef0f5;
+  --text-2: #aab0bd;
+  --text-3: #7d8494;
+  --panel: #1a1b22;
+  --surface: #22232c;
+  --page-bg: #14151b;
+  --sidebar-text: rgba(244, 242, 251, 0.78);
+  --sidebar-hover: rgba(255, 255, 255, 0.08);
+  --sidebar-active-bg: rgba(255, 255, 255, 0.13);
+  --success-bg: #113321;
+  --success: #4fae70;
+  --warning-bg: #3a2f10;
+  --warning: #e0b040;
+  --danger-bg: #3a1616;
+  --danger: #e2726f;
+}
+/* Padding ve border değerlerini width/height hesabına dahil eder; layout bozulmasın diye genelde değiştirilmez. */
+* {
+  box-sizing: border-box;
+}
+/* Tüm sayfanın temel ayarı. Responsive: min-width kaldırıldı, artık tüm ekran
+   genişliklerinde (mobil dahil) yatay scroll oluşturmadan daralabiliyor. */
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--page-bg);
+  color: var(--text);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+/* Buton, input ve selectlerin proje fontunu kullanmasını sağlar. */
+button,
+input,
+select {
+  font: inherit;
+}
+/* Bütün butonlarda el imlecini açar. */
+button {
+  cursor: pointer;
+}
+/* Tab ile seçilen form elemanlarının mor focus çerçevesi. */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(133, 116, 224, 0.28);
+  outline-offset: 2px;
+}
+/* Modal açıkken arka sayfanın scroll edilmesini engeller. */
+body.modal-open {
+  overflow: hidden;
+}

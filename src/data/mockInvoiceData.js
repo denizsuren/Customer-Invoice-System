@@ -1,0 +1,100 @@
+/*
+  DOSYA: mockInvoiceData.js
+
+  Backend hazır değilken Faturalar sayfasında kullanılan geçici veriler.
+  Backend bağlandığında bu dosyaya dokunmak yerine invoiceService.js içindeki
+  GET /invoices isteği kullanılacak.
+*/
+
+export const mockInvoices = [
+  {
+    id: "INV-2001",
+    customerName: "Elif Şahin",
+    invoiceDate: "01.06.2026",
+    dueDate: "10.06.2026",
+    amount: "480 ₺",
+    status: "+5 Gün Gecikme",
+    statusTone: "danger",
+    actionRecommendation: "SMS (Kısıtlama Uyarısı Gönderilecek)",
+  },
+  {
+    id: "INV-2015",
+    customerName: "Can Öztürk",
+    invoiceDate: "01.06.2026",
+    dueDate: "10.06.2026",
+    amount: "390 ₺",
+    status: "+8 Gün Gecikme",
+    statusTone: "danger",
+    actionRecommendation: "Hat Kısıtlama İşlemi Başlatıldı",
+  },
+  {
+    id: "INV-2042",
+    customerName: "Mehmet Kaya",
+    invoiceDate: "05.06.2026",
+    dueDate: "15.06.2026",
+    amount: "615 ₺",
+    status: "Gecikmiş Ödeme",
+    statusTone: "warning",
+    actionRecommendation: "Otomatik Ödeme İndirim Teşviki",
+  },
+  {
+    id: "INV-2055",
+    customerName: "Ayşe Yılmaz",
+    invoiceDate: "10.06.2026",
+    dueDate: "20.06.2026",
+    amount: "420 ₺",
+    status: "Ödendi",
+    statusTone: "success",
+    actionRecommendation: "—",
+  },
+  {
+    id: "INV-2068",
+    customerName: "Zeynep Demir",
+    invoiceDate: "12.06.2026",
+    dueDate: "22.06.2026",
+    amount: "250 ₺",
+    status: "Ödendi",
+    statusTone: "success",
+    actionRecommendation: "—",
+  },
+  {
+    id: "INV-2081",
+    customerName: "Deniz Aksoy",
+    invoiceDate: "15.06.2026",
+    dueDate: "25.06.2026",
+    amount: "540 ₺",
+    status: "Bekliyor",
+    statusTone: "warning",
+    actionRecommendation: "Vade Yaklaşıyor (Hatırlatma SMS'i)",
+  },
+  {
+    id: "INV-2099",
+    customerName: "Ahmet Yılmaz",
+    invoiceDate: "01.05.2026",
+    dueDate: "10.05.2026",
+    amount: "320 ₺",
+    status: "+45 Gün Gecikme",
+    statusTone: "danger",
+    actionRecommendation: "Yasal Takip Süreci",
+  },
+  {
+    id: "INV-2104",
+    customerName: "Burcu Çelik",
+    invoiceDate: "18.06.2026",
+    dueDate: "28.06.2026",
+    amount: "890 ₺",
+    status: "Bekliyor",
+    statusTone: "warning",
+    actionRecommendation: "Aşım Bildirimi Yapılmalı",
+  },
+  {
+    id: "INV-2112",
+    customerName: "Hasan Korkmaz",
+    invoiceDate: "20.06.2026",
+    dueDate: "30.06.2026",
+    amount: "150 ₺",
+    status: "Ödendi",
+    statusTone: "success",
+    actionRecommendation: "—",
+  },
+];

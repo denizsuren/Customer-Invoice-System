@@ -1,0 +1,209 @@
+/*
+  DOSYA: responsive.css
+
+  Projenin masaüstü tasarımını bozmadan mobil/tablet ekranlarda da düzgün
+  görünmesini sağlayan media query'ler burada toplanmıştır. Diğer .css
+  dosyalarındaki hiçbir class silinmedi/yeniden adlandırılmadı; burada sadece
+  dar ekranlar için ek/override kural tanımlanıyor. index.css'te en son
+  import edildiği için diğer dosyalardaki kuralları ezme önceliği burada.
+
+  Breakpointler:
+  1180px -> tablet (geniş): iki sütunlu grid'ler tek sütuna iner
+  900px  -> tablet (dar) / sidebar çekmeceye döner
+  640px  -> telefon: kart grid'leri, form sütunları tek sütuna iner
+  420px  -> küçük telefon: ince ayarlar
+*/
+
+/* ---------------------------------------------------------------------- */
+/* 1180px ve altı: geniş tablet / küçük laptop                             */
+/* ---------------------------------------------------------------------- */
+@media (max-width: 1180px) {
+  /* Ana sayfadaki grafik + öneri kartı satırı artık yan yana sığmadığı için alt alta iner. */
+  .dashboard-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Müşteri filtre paneli 5 yerine 3 sütuna iner, geri kalan alta taşar. */
+  .filter-panel {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* Login ekranındaki 560px sabit sol panel daralır, form her zaman görünür kalır. */
+  .login-page {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .login-brand-panel {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------------- */
+/* 900px ve altı: sidebar sabit menüden açılır/kapanır çekmeceye döner     */
+/* ---------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .app-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 200;
+    width: 260px;
+    max-width: 80vw;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04);
+    transform: translateX(-100%);
+    transition: transform 0.22s ease;
+  }
+
+  .sidebar--open {
+    transform: translateX(0);
+  }
+
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+    background: rgba(19, 22, 29, 0.36);
+  }
+
+  .topbar__menu-button {
+    display: inline-flex;
+  }
+
+  .main-area {
+    padding: 16px 18px 32px;
+  }
+
+  /* Analiz/Bölgesel sayfalarındaki eşit iki sütunlu kartlar alt alta iner. */
+  .dashboard-row--even {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .settings-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------------------------------------------------------------------- */
+/* 640px ve altı: telefon                                                  */
+/* ---------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .main-area {
+    padding: 14px 12px 28px;
+  }
+
+  .topbar {
+    height: auto;
+    flex-wrap: wrap;
+  }
+
+  .topbar__account span {
+    display: none;
+  }
+
+  .stats-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .filter-panel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .customer-toolbar {
+    height: auto;
+    flex-wrap: wrap;
+  }
+
+  .customer-toolbar input {
+    flex-basis: 100%;
+  }
+
+  .form-two-columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .detail-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .forecast-estimates {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .donut-layout {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .bar-chart {
+    gap: 12px;
+    padding: 0 4px;
+  }
+
+  .bar-column {
+    min-width: 40px;
+  }
+
+  .bar-fill {
+    width: 24px;
+  }
+
+  /* Müşteri/fatura tabloları dar ekranda sıkışıp okunmaz hale gelmesin diye
+     kartın kendisi yatay kaydırılabilir olur; kolonlar min-width sayesinde
+     okunur kalır. Tablonun JS/veri yapısı hiç değişmedi. */
+  .table-wrap,
+  .invoice-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .customer-table {
+    min-width: 760px;
+  }
+
+  .invoice-table {
+    min-width: 640px;
+  }
+
+  .login-form-panel {
+    padding: 28px 20px;
+  }
+
+  .login-form-card {
+    padding: 28px 22px;
+    gap: 24px;
+  }
+
+  .login-welcome-copy h1 {
+    font-size: 32px;
+  }
+
+  .modal {
+    padding: 18px;
+  }
+}
+
+/* ---------------------------------------------------------------------- */
+/* 420px ve altı: küçük telefon                                            */
+/* ---------------------------------------------------------------------- */
+@media (max-width: 420px) {
+  .filter-panel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .detail-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .brand > span:last-child {
+    font-size: 10px;
+  }
+}

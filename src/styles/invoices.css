@@ -1,0 +1,126 @@
+/*
+  DOSYA: invoices.css
+
+  Faturalar sayfasındaki tabloyu kontrol eder.
+  Kolon genişliği, satır yüksekliği, aksiyon yazısı ve boş/loading durumları
+  bu dosyada değiştirilir.
+*/
+
+/* Tabloyu beyaz kart içine alır ve yuvarlak köşeleri oluşturur. */
+.invoice-table-wrap {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+/* Fatura tablosunun bütün genişliği kullanmasını sağlar. */
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* Başlık ve veri hücrelerinin ortak boşluk, çizgi ve yazı ayarları. */
+.invoice-table th,
+.invoice-table td {
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--line);
+  color: var(--text-2);
+  font-size: 12.5px;
+  line-height: 1.4;
+  text-align: left;
+  vertical-align: middle;
+}
+
+/* Tablo başlıklarını daha küçük ve açık gri gösterir. */
+.invoice-table th {
+  color: var(--text-3);
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+/*
+  Figma'daki yedi kolonun yaklaşık genişlikleri.
+  Kolonları daraltıp genişletmek için yalnızca bu oranları değiştir.
+*/
+.invoice-table th:nth-child(1) {
+  width: 10%;
+}
+
+.invoice-table th:nth-child(2) {
+  width: 16%;
+}
+
+.invoice-table th:nth-child(3) {
+  width: 11%;
+}
+
+.invoice-table th:nth-child(4) {
+  width: 12%;
+}
+
+.invoice-table th:nth-child(5) {
+  width: 9%;
+}
+
+.invoice-table th:nth-child(6) {
+  width: 13%;
+}
+
+.invoice-table th:nth-child(7) {
+  width: 13%;
+}
+
+.invoice-table th:nth-child(8) {
+  width: 18%;
+}
+
+.invoice-table th:nth-child(9) {
+  width: 6%;
+}
+
+/* Fare satırın üzerindeyken hafif gri arka plan gösterir. */
+.invoice-table tbody tr:not(.invoice-state-row):hover {
+  background: var(--panel);
+}
+
+/* Son satırın alt çizgisini kaldırır. */
+.invoice-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* Fatura ID ve tutar gibi önemli değerleri koyu renkte gösterir. */
+.invoice-table td strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Aksiyon önerilerini PiA'nın ana mor rengiyle vurgular. */
+.invoice-action {
+  color: var(--accent) !important;
+  font-size: 12px !important;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+/* Aksiyon bulunmayan satırdaki tireyi nötr renge çevirir. */
+.invoice-action--empty {
+  color: var(--text-3) !important;
+  font-weight: 400;
+}
+
+/* Loading satırının tablonun ortasında görünmesini sağlar. */
+.invoice-state-row td {
+  height: 130px;
+  color: var(--text-3);
+  text-align: center;
+}
+
+/* Backend boş liste döndürdüğünde görünen mesaj. */
+.invoice-empty-state {
+  padding: 34px;
+  color: var(--text-3);
+  font-size: 13px;
+  text-align: center;
+}
