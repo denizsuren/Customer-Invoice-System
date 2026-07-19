@@ -1,37 +1,37 @@
-# 🎨 PiA Telekom — Frontend (React Yönetim Paneli)
+# 🎨 PiA Telecom — Frontend (React Admin Panel)
 
-Müşteri & fatura yönetim sisteminin arayüzü. React 19 + Vite ile geliştirilen, component tabanlı bir admin paneli. Backend hazır olmadığında **mock data modu** ile bağımsız çalışabilir — bu sayede frontend ve backend ekipleri paralel geliştirme yapabilmiştir.
+The user interface of the customer & invoice management system. A component-based admin panel built with React 19 + Vite. When the backend isn't available, it can run independently in **mock data mode** — which allowed the frontend and backend teams to develop in parallel.
 
-## 🛠 Teknolojiler
+## 🛠 Technologies
 
-- **React 19** + **Vite 8** — hızlı geliştirme ve build
-- **React Router 7** — sayfa yönlendirme
-- **ESLint + Prettier** — kod kalitesi ve tutarlı format
-- Harici UI kütüphanesi kullanılmadan **özel component seti** (Modal, Badge, Pagination, FormField, grafik bileşenleri...)
+- **React 19** + **Vite 8** — fast development and builds
+- **React Router 7** — page routing
+- **ESLint + Prettier** — code quality and consistent formatting
+- A **custom component library** built without external UI dependencies (Modal, Badge, Pagination, FormField, chart components...)
 
-## 📁 Proje Yapısı
+## 📁 Project Structure
 
 ```
 src/
 ├── pages/         → Dashboard, Customers, Invoices, Analytics, Regional, Settings, Login
 ├── components/
-│   ├── ui/        → Yeniden kullanılabilir temel bileşenler (Button, Modal, Badge, ...)
-│   ├── customers/ → Müşteri tablo, filtre ve modal bileşenleri
-│   ├── invoices/  → Fatura form ve tablo bileşenleri
-│   ├── charts/    → Gelir, paket dağılımı, şehir bazlı grafikler
-│   ├── analytics/ → Risk, tahmin ve öneri kartları
-│   ├── regional/  → Türkiye haritası (TurkeyMap) görselleştirmesi
-│   └── layout/    → Sidebar, Topbar, ikonlar
-├── services/      → API istemcisi + servis katmanı (auth, customer, invoice, ...)
-├── hooks/         → Özel hook'lar (useInvoices, ...)
-├── context/       → Global durum yönetimi
-├── i18n/          → Çok dillilik altyapısı
-└── data/          → Mock veri kaynakları
+│   ├── ui/        → Reusable base components (Button, Modal, Badge, ...)
+│   ├── customers/ → Customer table, filter, and modal components
+│   ├── invoices/  → Invoice form and table components
+│   ├── charts/    → Revenue, package distribution, and city-level charts
+│   ├── analytics/ → Risk, forecast, and recommendation cards
+│   ├── regional/  → Turkey map (TurkeyMap) visualization
+│   └── layout/    → Sidebar, Topbar, icons
+├── services/      → API client + service layer (auth, customer, invoice, ...)
+├── hooks/         → Custom hooks (useInvoices, ...)
+├── context/       → Global state management
+├── i18n/          → Internationalization infrastructure
+└── data/          → Mock data sources
 ```
 
-Servis katmanı, `VITE_API_URL` değerine göre **gerçek API** veya **mock veri** arasında şeffaf geçiş yapar; sayfalar hangi kaynağın kullanıldığını bilmez.
+The service layer transparently switches between the **real API** and **mock data** based on the `VITE_API_URL` value; pages have no knowledge of which source is in use.
 
-## 🚀 Kurulum & Çalıştırma
+## 🚀 Setup & Running
 
 ```bash
 npm install
@@ -39,26 +39,26 @@ cp .env.example .env
 npm run dev        # → http://localhost:5173
 ```
 
-### Ortam Değişkenleri (`.env`)
+### Environment Variables (`.env`)
 
-| Değer | Davranış |
+| Value | Behavior |
 |---|---|
-| `VITE_API_URL=/api` | **Önerilen.** İstekler Vite proxy'sine gider (`vite.config.js` → `localhost:8080`). Aynı origin'den çıktığı için **CORS sorunu yaşanmaz.** |
-| `VITE_API_URL=http://localhost:8080/api` | Backend'e doğrudan istek (cross-origin; backend'deki CORS yapılandırması gerekir) |
-| `VITE_API_URL=` (boş) | **Mock modu** — backend olmadan örnek verilerle çalışır |
+| `VITE_API_URL=/api` | **Recommended.** Requests go through the Vite proxy (`vite.config.js` → `localhost:8080`). Since they originate from the same origin, **no CORS issues occur.** |
+| `VITE_API_URL=http://localhost:8080/api` | Direct requests to the backend (cross-origin; requires the CORS configuration on the backend) |
+| `VITE_API_URL=` (empty) | **Mock mode** — runs with sample data, no backend needed |
 
-> Backend, veritabanı olarak Supabase'de barındırılan PostgreSQL'i kullanır; frontend'in Supabase ile doğrudan bir bağlantısı yoktur — tüm veri erişimi REST API üzerinden yapılır.
+> The backend uses PostgreSQL hosted on Supabase as its database; the frontend has no direct connection to Supabase — all data access goes through the REST API.
 
-## 🧹 Kalite Kontrolleri
+## 🧹 Quality Checks
 
 ```bash
 npm run lint           # ESLint
-npm run format:check   # Prettier kontrolü
-npm run format         # Otomatik formatlama
+npm run format:check   # Prettier check
+npm run format         # Auto-formatting
 npm run build          # Production build
-npm run preview        # Build önizleme
+npm run preview        # Build preview
 ```
 
-## 🔐 Oturum Akışı
+## 🔐 Session Flow
 
-Login sayfasından alınan oturum token'ı, servis katmanındaki `apiClient` tarafından her isteğe `Authorization: Bearer <token>` başlığı olarak eklenir. Token backend'de veritabanı üzerinde doğrulanır.
+The session token obtained from the login page is attached to every request by the `apiClient` in the service layer as an `Authorization: Bearer <token>` header. The token is validated against the database on the backend.
